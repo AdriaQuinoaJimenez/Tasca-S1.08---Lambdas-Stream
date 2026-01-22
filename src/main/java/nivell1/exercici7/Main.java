@@ -1,5 +1,6 @@
 package nivell1.exercici7;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
         List<String> orderedList = list.stream()
                 .filter(objectName -> objectName instanceof String)
                 .map(stringName -> (String) stringName)
-                .sorted((element1, element2) -> element2.length() - element1.length())
+                .sorted(Comparator.comparing(String::length).reversed())
                 .toList();
         System.out.println("Ordered list: ");
         orderedList.forEach(System.out::println);

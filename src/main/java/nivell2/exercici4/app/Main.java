@@ -2,6 +2,7 @@ package nivell2.exercici4.app;
 
 import nivell2.exercici4.interfaces.ListFilterer;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -18,17 +19,7 @@ public class Main {
                 .sorted((str1, str2) -> str1.charAt(INDEX) - str2.charAt(INDEX))
                 .toList();
         ListFilterer sortererByLetter = list -> list.stream()
-                .sorted( (str1, str2) -> {
-                            boolean isLetterStr1 = str1.contains(FILTER_BY_LETTER);
-                            boolean isLetterStr2 = str2.contains(FILTER_BY_LETTER);
-
-                            if (isLetterStr1 && !isLetterStr2) {
-                                return -1;
-                            }else if(!isLetterStr1 && isLetterStr2) {
-                                return 1;
-                            }
-                            return 0;
-                        })
+                .sorted(Comparator.comparing(str -> !str.contains(FILTER_BY_LETTER)))
                 .toList();
         ListFilterer modifierLetter = list -> list.stream()
                 .map(str -> str.replace(MODIFY_THIS_LETTER, MODIFIER))
